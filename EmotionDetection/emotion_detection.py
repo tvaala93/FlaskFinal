@@ -22,3 +22,17 @@ def emotion_detector(text_to_analyze:str):
         data['dominant_emotion'] = dominant_emotion
         #print(json.dumps(data,indent=4))
         return data
+
+    elif response.status_code == 400:
+        data = {
+            "anger": None, 
+            "disgust": None, 
+            "fear": None, 
+            "joy": None, 
+            "sadness": None, 
+            "dominant_emotion": None 
+        }
+        return data
+
+    else:
+        return f"ERROR: {response.status_code} -- {response.text}"

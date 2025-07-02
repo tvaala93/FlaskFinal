@@ -12,10 +12,12 @@ def hello_world():
 @app.route('/emotionDetector', methods=['GET'])
 def get_emotion():
     text_to_analyze = request.args.get('textToAnalyze', '')
-    if not text_to_analyze:
-        return render_template('index.html')
+    #if not text_to_analyze:
+    #    return render_template('index.html')
 
     analysis = ED.emotion_detector(text_to_analyze)
+    if analysis['dominant_emotion'] is None:
+        return "Invalid text! Please try again!"
     output = f"For the given statement, the system response is "
     output += f"'anger': {analysis['anger']}, "
     output += f"'disgust': {analysis['disgust']}, "
